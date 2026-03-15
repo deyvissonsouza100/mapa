@@ -39,6 +39,6 @@ window.APP_CONFIG = {
   },
   supabase: {
   url: "https://bmvscqfkjkzqzdoqhlig.supabase.co",
-  anonKey: "SUA_PUBLISHABLE_KEY_COMPLETA"
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtdnNjcWZramt6cXpkb3FobGlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MjA3NjcsImV4cCI6MjA4ODk5Njc2N30.j98MOaPJ8_AAUHJFhor-u_EjnSGJEwBhssoTfGykKC0"
   }
 };
