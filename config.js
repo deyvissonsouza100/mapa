@@ -38,7 +38,7 @@ window.APP_CONFIG = {
     localKey: "gcm_bh_vtrs_supabase"
   },
   supabase: {
-    url: "COLE_AQUI_O_PROJECT_URL",
-    anonKey: "COLE_AQUI_A_PUBLISHABLE_KEY"
+    url: "https://bmvscqfkjkzqzdoqhlig.supabase.coL",
+    anonKey: "sb_publishable_wHpMhd7mBSziscghJniU6Q_UvVvcKyF"
   }
 };
