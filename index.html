@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro Operacional · GCM BH</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div>
+          <h1>Centro Operacional</h1>
+          <p>GCM BH · VTR por data e hora</p>
+        </div>
+        <span id="modeBadge" class="mode-badge">Local</span>
+      </div>
+
+      <section class="panel">
+        <h2 id="formTitle">Nova / editar VTR</h2>
+
+        <label class="field">
+          <span>Prefixo</span>
+          <input id="prefix" type="text" placeholder="Ex.: Pampulha">
+        </label>
+
+        <label class="field">
+          <span>Equipe</span>
+          <input id="team" type="text" placeholder="Ex.: Alfa">
+        </label>
+
+        <label class="field">
+          <span>Buscar endereço</span>
+          <div class="address-search-row">
+            <input id="addressQuery" type="text" placeholder="Ex.: Av. Afonso Pena, 1212">
+            <button id="btnSearchAddress" type="button" class="btn btn-secondary">Buscar</button>
+          </div>
+        </label>
+
+        <div id="addressResults" class="address-results"></div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>Latitude</span>
+            <input id="lat" type="text" placeholder="-19.9208">
+          </label>
+
+          <label class="field">
+            <span>Longitude</span>
+            <input id="lng" type="text" placeholder="-43.9386">
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>Início (opcional)</span>
+            <input id="startAt" type="datetime-local">
+          </label>
+
+          <label class="field">
+            <span>Fim (opcional)</span>
+            <input id="endAt" type="datetime-local">
+          </label>
+        </div>
+
+        <div class="actions-grid">
+          <button id="btnSetOnMap" type="button" class="btn btn-secondary">Posicionar no mapa</button>
+          <button id="btnUseCenter" type="button" class="btn btn-secondary">Usar centro do mapa</button>
+          <button id="btnSave" type="button" class="btn btn-primary">Salvar VTR</button>
+          <button id="btnClearForm" type="button" class="btn btn-secondary">Limpar</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Importar plano em PDF</h2>
+
+        <label class="field">
+          <span>Arquivo PDF</span>
+          <input id="pdfFile" type="file" accept="application/pdf">
+        </label>
+
+        <div class="actions-grid">
+          <button id="btnReadPdf" type="button" class="btn btn-primary">Ler PDF</button>
+          <button id="btnSaveValidPdf" type="button" class="btn btn-secondary">Salvar válidas</button>
+        </div>
+
+        <div id="pdfDetectedCount">Nenhum item detectado.</div>
+        <div id="pdfPreview">
+          <div class="empty-state">Nenhuma VTR detectada no PDF.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>VTRs cadastradas</h2>
+          <strong id="vtrCount">0</strong>
+        </div>
+
+        <div class="actions-grid">
+          <button id="btnRefresh" type="button" class="btn btn-secondary">Atualizar</button>
+          <button id="btnDelete" type="button" class="btn btn-danger">Excluir selecionada</button>
+        </div>
+
+        <label class="field">
+          <span>Buscar na lista</span>
+          <input id="search" type="text" placeholder="Buscar prefixo / equipe / endereço">
+        </label>
+
+        <div id="vtrList" class="vtr-list">
+          <div class="empty-state">Nenhuma VTR cadastrada.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Como funciona</h2>
+        <ol class="help-list">
+          <li>Cadastre a VTR manualmente ou use a leitura de PDF.</li>
+          <li>Se não preencher início/fim, a VTR fica ativa até o fim do dia atual.</li>
+          <li>Se preencher horário, a VTR aparece e desaparece automaticamente.</li>
+          <li>Na leitura do PDF, use “Usar no formulário” para corrigir endereço/posição quando necessário.</li>
+        </ol>
+      </section>
+    </aside>
+
+    <main class="map-area">
+      <div class="map-topbar">
+        <span id="mapStatus">Belo Horizonte travado no mapa</span>
+      </div>
+
+      <div id="map"></div>
+
+      <div class="map-help">
+        <span id="helpText">Pronto para cadastrar VTRs.</span>
+      </div>
+
+      <div class="today-chip" id="todayInfo">Agora: --</div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.js"></script>
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
